@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deadlock Analysis - OS Visualizer</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/deadlock.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>">
+</head>
+<body class="page-with-nav">
+  <div class="particles" id="particles"></div>
+  
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <i class="fas fa-server"></i>
+        <span>OS Visualizer</span>
+      </div>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="cpu-scheduling.html" class="nav-link">CPU Scheduling</a>
+        <a href="deadlock.html" class="nav-link active">Deadlock</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>🔒 Deadlock Analysis</h1>
+    <p class="subtitle">Visualize deadlock detection, avoidance, and prevention strategies</p>
+
+    <!-- Tab Navigation -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="detection">
+        <i class="fas fa-search"></i> Detection
+      </button>
+      <button class="tab-btn" data-tab="avoidance">
+        <i class="fas fa-shield-alt"></i> Avoidance
+      </button>
+      <button class="tab-btn" data-tab="prevention">
+        <i class="fas fa-ban"></i> Prevention
+      </button>
+    </div>
+
+    <!-- Detection Tab -->
+    <div id="detection" class="tab-content active">
+      <div class="section-header">
+        <h2>🔄 Resource Allocation Graph (RAG) Visualization</h2>
+        <p>Visualize the RAG and detect deadlock cycles using cycle detection algorithms</p>
+      </div>
+
+      <div class="input-section">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Number of Processes:</label>
+            <input type="number" id="detProcessCount" min="2" max="10" value="3">
+          </div>
+          <div class="form-group">
+            <label>Number of Resources:</label>
+            <input type="number" id="detResourceCount" min="1" max="10" value="3">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Resource Instances (comma-separated):</label>
+          <input type="text" id="detResourceInstances" placeholder="3,3,2" value="3,3,2">
+        </div>
+
+        <div class="matrix-input">
+          <h3>Allocation Matrix (Process → Resource)</h3>
+          <p>Enter allocation edges: Process,Resource (one per line)</p>
+          <textarea id="detAllocationEdges" rows="4" placeholder="P1,R1&#10;P2,R2&#10;P3,R3"></textarea>
+        </div>
+
+        <div class="matrix-input">
+          <h3>Request Matrix (Process → Resource)</h3>
+          <p>Enter request edges: Process,Resource (one per line)</p>
+          <textarea id="detRequestEdges" rows="4" placeholder="P1,R2&#10;P2,R3&#10;P3,R1"></textarea>
+        </div>
+
+        <div class="button-group">
+          <button type="button" id="detectDeadlockBtn" class="btn-primary">
+            <i class="fas fa-search"></i> Detect Deadlock
+          </button>
+          <button type="button" id="stepDetectBtn" class="btn-secondary">
+            <i class="fas fa-step-forward"></i> Step-by-Step
+          </button>
+          <button type="button" id="clearDetectBtn" class="btn-tertiary">
+            <i class="fas fa-trash"></i> Clear
+          </button>
+        </div>
+      </div>
+
+      <div id="ragVisualization" class="visualization-container"></div>
+      <div id="detectionResult" class="result-container"></div>
+    </div>
+
+    <!-- Avoidance Tab -->
+    <div id="avoidance" class="tab-content">
+      <div class="section-header">
+        <h2>🛡️ Banker's Algorithm (Deadlock Avoidance)</h2>
+        <p>Determine if a system is in a safe state and find the safe sequence</p>
+      </div>
+
+      <div class="input-section">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Number of Processes:</label>
+            <input type="number" id="avProcessCount" min="2" max="10" value="3">
+          </div>
+          <div class="form-group">
+            <label>Number of Resources:</label>
+            <input type="number" id="avResourceCount" min="1" max="10" value="3">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Total Resource Vector (comma-separated):</label>
+          <input type="text" id="avTotal" placeholder="10,5,7" value="10,5,7">
+        </div>
+
+        <div class="form-group">
+          <label>Available Vector (comma-separated):</label>
+          <input type="text" id="avAvailable" placeholder="3,3,2" value="3,3,2">
+        </div>
+
+        <div class="matrix-input">
+          <h3>Max Matrix (rows newline, values comma):</h3>
+          <textarea id="avMax" rows="3" placeholder="7,5,3&#10;3,2,2&#10;9,0,2">7,5,3
+3,2,2
+9,0,2</textarea>
+        </div>
+
+        <div class="matrix-input">
+          <h3>Allocation Matrix (rows newline, values comma):</h3>
+          <textarea id="avAlloc" rows="3" placeholder="0,1,0&#10;2,0,0&#10;3,0,2">0,1,0
+2,0,0
+3,0,2</textarea>
+        </div>
+
+        <div class="button-group">
+          <button type="button" id="runBankersBtn" class="btn-primary">
+            <i class="fas fa-shield-alt"></i> Run Banker's Algorithm
+          </button>
+          <button type="button" id="stepBankersBtn" class="btn-secondary">
+            <i class="fas fa-step-forward"></i> Step-by-Step
+          </button>
+          <button type="button" id="clearBankersBtn" class="btn-tertiary">
+            <i class="fas fa-trash"></i> Clear
+          </button>
+        </div>
+      </div>
+
+      <div id="bankersVisualization" class="visualization-container"></div>
+      <div id="avoidanceResult" class="result-container"></div>
+    </div>
+
+    <!-- Prevention Tab -->
+    <div id="prevention" class="tab-content">
+      <div class="section-header">
+        <h2>🚫 Deadlock Prevention Strategies</h2>
+        <p>Visualize how different prevention strategies affect process execution</p>
+      </div>
+
+      <div class="input-section">
+        <div class="form-group">
+          <label>Select Prevention Method:</label>
+          <select id="preventionMethod" class="form-select">
+            <option value="none">None (Original)</option>
+            <option value="mutex">Mutual Exclusion</option>
+            <option value="holdwait">Hold & Wait Elimination</option>
+            <option value="preemption">No Preemption</option>
+            <option value="circular">Circular Wait Ordering</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Process-Resource Scenario (Process,Resource,Type):</label>
+          <p>Type: A=Allocate, R=Request</p>
+          <textarea id="preventionScenario" rows="6" placeholder="P1,R1,A&#10;P2,R2,A&#10;P1,R2,R&#10;P2,R1,R">P1,R1,A
+P2,R2,A
+P1,R2,R
+P2,R1,R
+P3,R3,A
+P3,R3,R</textarea>
+        </div>
+
+        <div class="button-group">
+          <button type="button" id="runPreventionBtn" class="btn-primary">
+            <i class="fas fa-play"></i> Run Simulation
+          </button>
+          <button type="button" id="animatePreventionBtn" class="btn-secondary">
+            <i class="fas fa-film"></i> Animate
+          </button>
+          <button type="button" id="clearPreventionBtn" class="btn-tertiary">
+            <i class="fas fa-trash"></i> Clear
+          </button>
+        </div>
+      </div>
+
+      <div id="preventionVisualization" class="visualization-container"></div>
+      <div id="preventionResult" class="result-container"></div>
+    </div>
+  </div>
+
+  <script src="assets/js/deadlock.js"></script>
+</body>
+</html>
+

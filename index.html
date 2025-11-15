@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Operating System Visualizer - Interactive Learning Platform</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/welcome.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖥️</text></svg>"
+    />
+  </head>
+  <body>
+    <!-- Floating particles background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <i class="fas fa-server"></i>
+          <span>OS Visualizer</span>
+        </div>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link active">Home</a>
+          <a href="cpu-scheduling.html" class="nav-link">CPU Scheduling</a>
+          <a href="deadlock.html" class="nav-link">Deadlock</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="gradient-text">Operating System</span><br />
+          <span class="gradient-text">Visualizer</span>
+        </h1>
+        <p class="hero-subtitle">
+          Interactive learning platform for understanding core OS concepts
+          through real-time visualizations and simulations
+        </p>
+        <div class="hero-buttons">
+          <a href="cpu-scheduling.html" class="btn btn-primary">
+            <i class="fas fa-microchip"></i>
+            CPU Scheduling
+          </a>
+          <a href="deadlock.html" class="btn btn-secondary">
+            <i class="fas fa-lock"></i>
+            Deadlock Analysis
+          </a>
+        </div>
+      </div>
+      <div class="hero-visualization">
+        <div class="animated-cpu">
+          <div class="cpu-core-animated"></div>
+          <div class="process-queue-animated">
+            <div class="process-chip">P1</div>
+            <div class="process-chip">P2</div>
+            <div class="process-chip">P3</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="features-section">
+      <div class="container">
+        <h2 class="section-title">🎯 What We Offer</h2>
+        <p class="section-subtitle">
+          Comprehensive visualizations for understanding operating systems
+        </p>
+
+        <div class="features-grid">
+          <!-- CPU Scheduling Feature -->
+          <div class="feature-card" data-link="cpu-scheduling.html">
+            <div class="feature-icon">
+              <i class="fas fa-microchip"></i>
+            </div>
+            <h3>CPU Scheduling</h3>
+            <p>
+              Visualize and compare multiple CPU scheduling algorithms in
+              real-time
+            </p>
+            <ul class="feature-list">
+              <li>
+                <i class="fas fa-check"></i> FCFS, Round Robin, SPN, SRT, HRRN
+              </li>
+              <li><i class="fas fa-check"></i> Interactive Gantt Charts</li>
+              <li><i class="fas fa-check"></i> Performance Comparison</li>
+              <li><i class="fas fa-check"></i> Step-by-step Execution</li>
+            </ul>
+            <a href="cpu-scheduling.html" class="feature-link">
+              Explore <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <!-- Deadlock Feature -->
+          <div class="feature-card" data-link="deadlock.html">
+            <div class="feature-icon">
+              <i class="fas fa-lock"></i>
+            </div>
+            <h3>Deadlock Analysis</h3>
+            <p>
+              Comprehensive deadlock detection, avoidance, and prevention tools
+            </p>
+            <ul class="feature-list">
+              <li><i class="fas fa-check"></i> RAG Visualization</li>
+              <li><i class="fas fa-check"></i> Banker's Algorithm</li>
+              <li><i class="fas fa-check"></i> Cycle Detection</li>
+              <li><i class="fas fa-check"></i> Prevention Strategies</li>
+            </ul>
+            <a href="deadlock.html" class="feature-link">
+              Explore <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="why-section">
+      <div class="container">
+        <h2 class="section-title">✨ Why Choose Our Platform?</h2>
+        <div class="why-grid">
+          <div class="why-item">
+            <div class="why-icon"><i class="fas fa-rocket"></i></div>
+            <h4>Real-time Visualization</h4>
+            <p>
+              Watch algorithms execute step-by-step with interactive animations
+            </p>
+          </div>
+          <div class="why-item">
+            <div class="why-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h4>Educational Focus</h4>
+            <p>
+              Designed specifically for learning and understanding OS concepts
+            </p>
+          </div>
+          <div class="why-item">
+            <div class="why-icon"><i class="fas fa-palette"></i></div>
+            <h4>Beautiful UI</h4>
+            <p>Modern, responsive design that works on all devices</p>
+          </div>
+          <div class="why-item">
+            <div class="why-icon"><i class="fas fa-code"></i></div>
+            <h4>No Installation</h4>
+            <p>Pure web-based - runs directly in your browser</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <div class="container">
+        <p>
+          &copy; 2024 Operating System Visualizer. Made with ❤️ for learning.
+        </p>
+      </div>
+    </footer>
+
+    <script src="assets/js/welcome.js"></script>
+  </body>
+</html>

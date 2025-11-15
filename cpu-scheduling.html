@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🚀 Advanced CPU Scheduling Visualizer</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖥️</text></svg>">
+</head>
+<body>
+  <!-- Floating particles background -->
+  <div class="particles" id="particles"></div>
+  
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <i class="fas fa-server"></i>
+        <span>OS Visualizer</span>
+      </div>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="cpu-scheduling.html" class="nav-link active">CPU Scheduling</a>
+        <a href="deadlock.html" class="nav-link">Deadlock</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 80px;">
+    <h1>🚀 Advanced CPU Scheduling Visualizer</h1>
+    <p class="subtitle">Real-time algorithm simulation with interactive visualizations, step-by-step execution, and comprehensive analytics</p>
+
+    <div class="input-section">
+      <div class="form-group">
+        <label>Select Algorithms:</label>
+        <div class="algorithm-checkboxes">
+          <label class="checkbox-label">
+            <input type="checkbox" id="fcfs" value="1" checked> FCFS
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="rr" value="2" checked> Round Robin
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="spn" value="3" checked> SPN
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="srt" value="4" checked> SRT
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="hrrn" value="5" checked> HRRN
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="prio" value="6"> Priority (Preemptive + Aging)
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Round Robin Quantum:</label>
+        <input id="quantum" type="number" value="3" min="1" max="10" title="Time quantum for Round Robin">
+      </div>
+
+      <div class="form-group">
+        <label>Context Switch Overhead (ticks):</label>
+        <input id="ctxOverhead" type="number" value="0" min="0" max="10" title="Time cost when switching processes">
+      </div>
+
+      <div class="form-group">
+        <label>Aging Rate (Priority gain per waiting tick):</label>
+        <input id="agingRate" type="number" value="1" min="0" max="5" title="Increases dynamic priority of waiting processes">
+      </div>
+
+      <div class="form-group">
+        <label>Process Data (name,arrival,burst[,priority]):</label>
+        <textarea id="processData" rows="6" placeholder="P1,0,4&#10;P2,1,3&#10;P3,2,5">P1,0,6
+P2,1,4
+P3,2,2
+P4,3,3
+P5,5,1</textarea>
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="runBtn">
+          <i class="fas fa-play"></i> Run Live Simulation
+        </button>
+        <button type="button" id="stepBtn">
+          <i class="fas fa-step-forward"></i> Step-by-Step
+        </button>
+        <button type="button" id="pauseBtn" style="display: none;">
+          <i class="fas fa-pause"></i> Pause
+        </button>
+        <button type="button" id="exportBtn">
+          <i class="fas fa-download"></i> Export Results
+        </button>
+        <button type="button" id="clearBtn">
+          <i class="fas fa-trash"></i> Clear Results
+        </button>
+      </div>
+    </div>
+
+    <!-- Algorithm Information Panel -->
+    <div class="algorithm-info" id="algorithmInfo" style="display: none;">
+      <h3>📚 Algorithm Information</h3>
+      <div class="info-content" id="infoContent"></div>
+    </div>
+
+    <!-- Real-time Visualization Panel -->
+    <div class="visualization-panel" id="visualizationPanel" style="display: none;">
+      <h3>🎯 Real-time Visualization</h3>
+      <div class="cpu-cores" id="cpuCores">
+        <div class="cpu-core" id="cpu1">CPU 1</div>
+      </div>
+      <div class="process-flow">
+        <h4>Process Queue</h4>
+        <div class="process-queue" id="processQueue"></div>
+      </div>
+    </div>
+
+    <div id="results" class="results-section">
+      <h2>📊 Simulation Results</h2>
+      <div id="output"></div>
+    </div>
+
+    <div id="comparison" class="comparison-section">
+      <h2>📈 Algorithm Comparison</h2>
+      <div id="comparisonTable"></div>
+    </div>
+
+  </div>
+
+  <script src="assets/js/live-scheduler.js"></script>
+</body>
+</html>
